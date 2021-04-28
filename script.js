@@ -2,7 +2,7 @@
 "use strict";
 
 const form = document.getElementById("form");
-const pictureConteiner = document.querySelector(".pictures");
+const pictureContainer = document.querySelector(".pictures");
 const searchControls = document.getElementById("searchControls");
 const numberPages = document.querySelector(".numberPages");
 const infoAboutLastPage = document.getElementById("store-numer-of-pages");
@@ -27,8 +27,8 @@ const openModalFunction = function () {
 
 const getCorrectString = (string) => {
   let trimedSearchString = string.trim();
-  const patern = / /g;
-  return trimedSearchString.replace(patern, "+");
+  const pattern = / /g;
+  return trimedSearchString.replace(pattern, "+");
 };
 
 const findDataFromApi = function (url) {
@@ -41,7 +41,7 @@ const findDataFromApi = function (url) {
     });
 };
 
-const renderNoResolt = function () {
+const renderNoResold = function () {
   const html = `
       <article class="picture">
       <div class="picture__data">
@@ -49,8 +49,8 @@ const renderNoResolt = function () {
       </div>
     </article>
       `;
-  pictureConteiner.insertAdjacentHTML("beforeend", html);
-  pictureConteiner.style.opacity = 1;
+  pictureContainer.insertAdjacentHTML("beforeend", html);
+  pictureContainer.style.opacity = 1;
 };
 
 const clearContent = function (elementID) {
@@ -82,8 +82,8 @@ const renderCardComponent = function (data, index) {
 </article>
   `;
 
-  pictureConteiner.insertAdjacentHTML("beforeend", html);
-  pictureConteiner.style.opacity = 1;
+  pictureContainer.insertAdjacentHTML("beforeend", html);
+  pictureContainer.style.opacity = 1;
   numberPages.style.opacity = 1;
   const expandButton = document.getElementById(`button-${index}`);
   const expandText = document.getElementById(`text-${index}`);
@@ -114,7 +114,7 @@ const printPageNumber = (number) =>
 const generateFetchData = (url) => {
   findDataFromApi(url).then((data) => {
     if (!Array.isArray(data) || data.length === 0) {
-      renderNoResolt();
+      renderNoResold();
     } else {
       data.forEach((element, index) => {
         renderCardComponent(element, index);
@@ -265,6 +265,7 @@ specificPage.addEventListener("submit", (event) => {
 
   if (Number(number) === 1) {
     prevPage.style.pointerEvents = "none";
+    nextPage.style.pointerEvents = "auto";
   } else {
     prevPage.style.pointerEvents = "auto";
   }
